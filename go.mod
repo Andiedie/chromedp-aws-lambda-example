@@ -2,7 +2,10 @@ module github.com/Andiedie/chromedp-aws-lambda-example
 
 go 1.18
 
-require github.com/chromedp/chromedp v0.8.2
+require (
+	github.com/aws/aws-lambda-go v1.32.0
+	github.com/chromedp/chromedp v0.8.2
+)
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20220515234810-83d799542a04 // indirect

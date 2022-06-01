@@ -2,13 +2,15 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/chromedp/chromedp"
 )
 
-func main() {
+func Handler(_ context.Context, _ json.RawMessage) error {
 	opts := []chromedp.ExecAllocatorOption{
 		chromedp.NoFirstRun,
 		chromedp.NoDefaultBrowserCheck,
@@ -39,4 +41,9 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(content)
+	return nil
+}
+
+func main() {
+	lambda.Start(Handler)
 }
