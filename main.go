@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/chromedp/chromedp"
@@ -45,5 +46,12 @@ func Handler(_ context.Context, _ json.RawMessage) error {
 }
 
 func main() {
-	lambda.Start(Handler)
+	if _, exists := os.LookupEnv("AWS_LAMBDA_RUNTIME_API"); exists {
+		lambda.Start(Handler)
+	} else {
+		err := Handler(context.Background(), nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
