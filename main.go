@@ -27,6 +27,8 @@ func Handler(_ context.Context, _ json.RawMessage) error {
 		chromedp.Flag("remote-debugging-address", "0.0.0.0"),
 		chromedp.Flag("disable-dev-shm-usage", true),
 		chromedp.Flag("enable-features", "NetworkService,NetworkServiceInProcess"),
+		chromedp.Flag("disable-gpu-shader-disk-cache", true),
+		chromedp.Flag("disable-gpu-early-init", true),
 	}
 	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer cancel()
