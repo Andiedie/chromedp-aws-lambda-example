@@ -13,22 +13,12 @@ import (
 
 func Handler(_ context.Context, _ json.RawMessage) error {
 	opts := []chromedp.ExecAllocatorOption{
-		chromedp.NoFirstRun,
-		chromedp.NoDefaultBrowserCheck,
-		chromedp.NoSandbox,
-		chromedp.DisableGPU,
 		chromedp.Headless,
-		chromedp.Flag("no-zygote", true),
-		chromedp.Flag("user-data-dir", "/tmp/chrome-user-data-dir"),
-		chromedp.Flag("homedir", "/tmp/chrome-home"),
-		chromedp.Flag("data-path", "/tmp/chrome-data-path"),
-		chromedp.Flag("disk-cache-dir", "/tmp/chrome-disk-cache-dir"),
-		chromedp.Flag("remote-debugging-port", "9222"),
-		chromedp.Flag("remote-debugging-address", "0.0.0.0"),
+		chromedp.NoSandbox,
+		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-dev-shm-usage", true),
-		chromedp.Flag("enable-features", "NetworkService,NetworkServiceInProcess"),
-		chromedp.Flag("disable-gpu-shader-disk-cache", true),
-		chromedp.Flag("disable-gpu-early-init", true),
+		chromedp.Flag("single-process", true),
+		chromedp.Flag("no-zygote", true),
 	}
 	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer cancel()
