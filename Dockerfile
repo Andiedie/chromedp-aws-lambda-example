@@ -17,7 +17,7 @@ RUN go build -o main
 #
 #ENTRYPOINT [ "./main" ]
 
-FROM zeke/headless-shell
+FROM zeke/headless-shell:102.0.5005.115
 
 COPY --from=builder /app/main .
 
